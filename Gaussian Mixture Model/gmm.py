@@ -23,11 +23,8 @@ def gmm(X, K, max_iter=20, smoothing=1e-2):
     R = np.zeros((N, K))
     C = np.zeros((K, D, D))
     pi = np.ones(K) / K
-
-    for k in range(K):
-        M[k] = X[np.random.choice(N)]
-        C[k] = np.eye(D)
-
+    M = np.array([X[np.random.choice(N)] for _ in range(K)])
+    C = [np.eye(D) for _ in range(K)]
     lls = []
     weighted_pdfs = np.zeros((N, K))
     for i in range(max_iter):
